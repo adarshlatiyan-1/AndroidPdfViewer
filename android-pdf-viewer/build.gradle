@@ -4,11 +4,11 @@ apply plugin: 'maven-publish'
 var libraryVersion = "5.0.1"
 
 android {
-    compileSdk 35
+    compileSdk 34
 
     defaultConfig {
         namespace "com.github.barteksc.pdfviewer"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 34
         versionCode 1
         versionName libraryVersion
@@ -38,6 +38,6 @@ publishing {
 }
 
 dependencies {
-    implementation 'androidx.core:core:1.16.0'
+    implementation 'androidx.core:core:1.12.0'
     api 'io.legere:pdfiumandroid:1.0.33'
 }
