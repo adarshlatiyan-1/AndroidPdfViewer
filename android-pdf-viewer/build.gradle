@@ -4,7 +4,7 @@ apply plugin: 'maven-publish'
 var libraryVersion = "5.0.1"
 
 android {
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         namespace "com.github.barteksc.pdfviewer"
