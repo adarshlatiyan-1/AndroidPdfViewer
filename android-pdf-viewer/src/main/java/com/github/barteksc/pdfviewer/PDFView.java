@@ -63,16 +63,19 @@ import com.github.barteksc.pdfviewer.util.FitPolicy;
 import com.github.barteksc.pdfviewer.util.MathUtils;
 import com.github.barteksc.pdfviewer.util.SnapEdge;
 import com.github.barteksc.pdfviewer.util.Util;
-import io.legere.pdfiumandroid.PdfDocument;
-import io.legere.pdfiumandroid.PdfiumCore;
-import io.legere.pdfiumandroid.util.Config;
-import io.legere.pdfiumandroid.util.Size;
 
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import io.legere.pdfiumandroid.DefaultLogger;
+import io.legere.pdfiumandroid.PdfDocument;
+import io.legere.pdfiumandroid.PdfiumCore;
+import io.legere.pdfiumandroid.util.AlreadyClosedBehavior;
+import io.legere.pdfiumandroid.util.Config;
+import io.legere.pdfiumandroid.util.Size;
 
 /**
  * It supports animations, zoom, cache, and swipe.
@@ -311,8 +314,12 @@ public class PDFView extends RelativeLayout {
         debugPaint = new Paint();
         debugPaint.setStyle(Style.STROKE);
 
-        pdfiumCore = new PdfiumCore(context, new Config());
+        pdfiumCore = new PdfiumCore(context, getPdfiumCoreConfig());
         setWillNotDraw(false);
+    }
+
+    protected Config getPdfiumCoreConfig() {
+        return new Config(new DefaultLogger(), AlreadyClosedBehavior.IGNORE);
     }
 
     private void load(DocumentSource docSource, String password) {
